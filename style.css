@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans Thai', sans-serif;
+    background-color: #f5ede0;
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    padding: 32px 16px;
+}
+
+/* Mood Bar */
+.mood-bar {
+    background: #ede0ce;
+    border-radius: 16px;
+    padding: 16px 24px;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 20px;
+    border: 1.5px solid #d4b896;
+}
+
+.mood-label {
+    font-size: 13px;
+    color: #8b6f47;
+    margin-bottom: 10px;
+}
+.mood-options {
+    display: flex;
+    gap: 8px;
+}
+
+.mood-btn {
+    background: #f5ede0;
+    border: 1.5px solid #d4b896;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.mood-btn:hover {
+    transform: scale(1.2);
+}
+.mood-btn.active {
+    background: #d4b896;
+    border-color: #a0784a;
+}
+/* Main Card*/
+.card {
+    background: #fdf6ec;
+    border-radius: 20px;
+    padding: 28px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 4px 4px 0px #d4b896;
+    border: 1.5px solid #d4b896;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #5c3d1e;
+    margin-bottom: 20px;
+}
+
+/* Add Task */
+.add-task {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+.add-task input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid #d4b896;
+    font-size: 14px;
+    background: #f5ede0;
+    color: #5c3d1e;
+    font-family: 'Noto Sans Thai', sans-serif;
+    outline: none;
+}
+
+.add-task input:focus {
+    border-color: #a0784a;
+}
+
+.add-task input::placeholder {
+    color: #b89a72;
+}
+
+#addBtn {
+    background: #a0784a;
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background 0.2s;
+}
+
+#addBtn:hover {
+    background: #5c3d1e;
+}
+
+/* Task List */
+#takeList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.task-item {
+     display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: #f5ede0;
+  border: 1.5px solid #d4b896;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.task-item:done {
+    opacity: 0.6;
+}
+.task-item.done .task-text {
+  text-decoration: line-through;
+  color: #b89a72;
+}
+
+.task-check {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #a0784a;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.task-check.checked {
+  background: #a0784a;
+  color: #fff;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 14px;
+  color: #5c3d1e;
+}
+
+.task-delete {
+  background: none;
+  border: none;
+  color: #d4b896;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.task-delete:hover {
+  color: #a0784a;
+}
+
+/* FOX AREA */
+.fox-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.fox-speech {
+  background: #fdf6ec;
+  border: 1.5px solid #d4b896;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #5c3d1e;
+  max-width: 280px;
+  text-align: center;
+}
+
+.fox-emoji {
+  font-size: 48px;
+  transition: all 0.3s;
+}
+/* PRIORITY */
+.priority-select {
+  display: flex;
+  gap: 4px;
+}
+
+.pri-btn {
+  font-size: 16px;
+  background: #f5ede0;
+  border: 1.5px solid #d4b896;
+  border-radius: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0.4;
+}
+
+.pri-btn.active {
+  opacity: 1;
+  background: #ede0ce;
+  border-color: #a0784a;
+}
+
+.priority-dot {
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.task-item.high {
+  border-left: 3px solid #e74c3c;
+}
+
+.task-item.medium {
+  border-left: 3px solid #f39c12;
+}

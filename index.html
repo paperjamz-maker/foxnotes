@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>foxnotes 🦊</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- MOOD SECTION -->
+  <div class="mood-bar">
+    <p class="mood-label">Today's Mood</p>
+    <div class="mood-options">
+      <button class="mood-btn" data-mood="😊">😊</button>
+      <button class="mood-btn" data-mood="😴">😴</button>
+      <button class="mood-btn" data-mood="😤">😤</button>
+      <button class="mood-btn" data-mood="🥰">🥰</button>
+      <button class="mood-btn" data-mood="😭">😭</button>
+      <button class="mood-btn" data-mood="⚡">⚡</button>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card">
+    <h1 class="card-title">today's tasks 🦊</h1>
+
+    <!-- ADD TASK -->
+    <div class="add-task">
+  <input type="text" id="taskInput" placeholder="Add a new task">
+  <div class="priority-select">
+    <button class="pri-btn active" data-priority="normal">⚪</button>
+    <button class="pri-btn" data-priority="medium">🟡</button>
+    <button class="pri-btn" data-priority="high">🔴</button>
+  </div>
+  <button id="addBtn">+</button>
+</div>>
+
+    <!-- TASK LIST -->
+    <ul id="taskList"></ul>
+  </div>
+
+  <!-- FOX MASCOT -->
+  <div class="fox-area">
+    <div class="fox-speech" id="foxSpeech">Hello, I'm Fred your fox buddy!  🦊</div>
+    <div class="fox-emoji" id="foxEmoji">🦊</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
