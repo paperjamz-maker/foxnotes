@@ -6,6 +6,7 @@ const foxEmoji = document.getElementById('foxEmoji')
 const foxSpeech = document.getElementById('foxSpeech')
 const moodBtns = document.querySelectorAll('.mood-btn')
 const priBtns = document.querySelectorAll('.pri-btn')
+const categorySelect = document.getElementById('categorySelect')
 let currentPriority = 'normal'
 
 // ===== MOOD =====
@@ -34,17 +35,21 @@ taskInput.addEventListener('keypress', (e) => {
 
 function addTask() {
   const text = taskInput.value.trim()
+  const categoryInput = document.getElementById('categorySelect')
+  const category = categoryInput.value.trim() || 'general'
   if (!text) return
 
   const li = document.createElement('li')
   li.className = `task-item ${currentPriority}` 
   li.innerHTML = `
-    <div class="task-check" onclick="toggleTask(this)"></div>
-    <span class="task-text">${text}</span>
-    <button class="task-delete" onclick="deleteTask(this)">✕</button>
-  `
+  <div class="task-check" onclick="toggleTask(this)"></div>
+  <span class="task-text">${text}</span>
+  <span class="category-badge">${category}</span>
+  <button class="task-delete" onclick="deleteTask(this)">✕</button>
+`
   taskList.appendChild(li)
   taskInput.value = ''
+  
   updateFox()
 
   function saveTasks() {
@@ -123,25 +128,47 @@ function saveTasks() {
     tasks.push({
       text: item.querySelector('.task-text').textContent,
       done: item.classList.contains('done'),
-      priority: item.dataset.priority || 'normal'
+      priority: item.dataset.priority || 'normal',
+      category: item.dataset.category || 'personal'
     })
   })
   localStorage.setItem('foxnotes', JSON.stringify(tasks))
 }
+
+// ===== DATE =====
+function showDate() {
+  const now = new Date()
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  
+  const day = days[now.getDay()]
+  const date = now.getDate()
+  const month = months[now.getMonth()]
+  const year = now.getFullYear()
+  
+  document.getElementById('dateDisplay').textContent = 
+    `${day}, ${date} ${month} ${year}`
+}
+
+showDate()
 
 function loadTasks() {
   const saved = localStorage.getItem('foxnotes')
   if (!saved) return
   JSON.parse(saved).forEach(task => {
     const priorityEmoji = task.priority === 'high' ? '🔴' : task.priority === 'medium' ? '🟡' : ''
+    const category = task.category || 'general'
+const categoryEmoji = ''
+
     const li = document.createElement('li')
     li.className = `task-item ${task.priority || 'normal'}` + (task.done ? ' done' : '')
     li.dataset.priority = task.priority || 'normal'
     li.innerHTML = `
-      <div class="task-check ${task.done ? 'checked' : ''}" onclick="toggleTask(this)">${task.done ? '✓' : ''}</div>
-      <span class="task-text">${task.text}</span>
-      <span class="priority-dot">${priorityEmoji}</span>
-      <button class="task-delete" onclick="deleteTask(this)">✕</button>
+     <div class="task-check" onclick="toggleTask(this)"></div>
+     <span class="task-text">${task.text}</span>
+     <span class="category-badge">${category}</span>
+     <span class="priority-dot">${priorityEmoji}</span>
+     <button class="task-delete" onclick="deleteTask(this)">✕</button>
     `
     taskList.appendChild(li)
   })
@@ -149,3 +176,30 @@ function loadTasks() {
 }
 
 loadTasks()
+
+// ===== CURSOR ANIMATION =====
+let lastPaw = 0
+document.addEventListener('mousemove', (e) => {
+  const now = Date.now()
+  if (now - lastPaw < 150) return // spawn every 150ms
+  lastPaw = now
+
+  const paw = document.createElement('div')
+  paw.textContent = '🐾'
+  paw.style.cssText = `
+    position: fixed;
+    left: ${e.clientX - 10}px;
+    top: ${e.clientY - 10}px;
+    font-size: 16px;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.5s;
+    opacity: 1;
+  `
+  document.body.appendChild(paw)
+
+  setTimeout(() => {
+    paw.style.opacity = '0'
+    setTimeout(() => paw.remove(), 500)
+  }, 300)
+})
